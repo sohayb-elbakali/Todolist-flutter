@@ -51,6 +51,16 @@ class _TasksState extends State<Tasks> {
           ),
         ],
       ),
+      body: ListView.builder(
+        itemCount: _registeredTasks.length,
+        itemBuilder: (context, index) {
+          final task = _registeredTasks[index];
+          return ListTile(
+            title: Text(task.title),
+            subtitle: Text(task.description),
+          );
+        },
+      ),
     );
   }
 }
