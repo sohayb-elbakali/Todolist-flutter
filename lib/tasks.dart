@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'models/task.dart';
+import 'widgets/new_task.dart';
+
 
 class Tasks extends StatefulWidget {
   const Tasks({super.key});
@@ -34,7 +36,7 @@ class _TasksState extends State<Tasks> {
   void _openAddTaskOverlay() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const Text('Exemple de fenêtre'),
+      builder: (ctx) => const NewTask(),
     );
   }
   @override
