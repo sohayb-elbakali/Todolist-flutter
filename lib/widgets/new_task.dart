@@ -8,6 +8,36 @@ return _NewTaskState();
 } }
 class _NewTaskState extends State<NewTask>{
 
+void _submitTaskData() {
+if (_titleController.text.trim().isEmpty) {
+showDialog(
+context: context,
+builder: (ctx) => AlertDialog(
+title: const Text('Erreur'),
+content: const Text(
+'Merci de saisir le titre de la tâche à ajouter dans la liste'),
+actions: [
+TextButton(
+onPressed: () {
+Navigator.pop(ctx);
+},
+child: const Text('Okay'),
+),
+],
+),
+);
+return;
+}
+}
+  
+final _titleController = TextEditingController();
+@override
+void dispose() {
+_titleController.dispose();
+super.dispose();
+}
+
+
 var _enteredTitle = '';
 void _saveTitleInput(String inputValue) {
 _enteredTitle = inputValue;
@@ -21,7 +51,7 @@ return Padding(
   mainAxisSize: MainAxisSize.min,
   children: [
    TextField(
-    onChanged: _saveTitleInput,
+    controller: _titleController,
     maxLength: 50,
     decoration: const InputDecoration(
     label: Text('Task title'),
@@ -30,7 +60,7 @@ return Padding(
    Row(
     children: [
      ElevatedButton(
-       onPressed: () { print(_enteredTitle);},
+       onPressed: _submitTaskData,
        child: const Text('Enregistrer'),
      ),
     ],
