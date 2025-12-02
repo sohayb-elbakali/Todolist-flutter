@@ -36,9 +36,16 @@ class _TasksState extends State<Tasks> {
   void _openAddTaskOverlay() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const NewTask(),
+      builder: (ctx) => NewTask(onAddTask: _addTask),
     );
   }
+
+  Future<void> _addTask(Task task) async {
+await Future.delayed(Duration(seconds: 2));
+  setState(() {
+  _registeredTasks.add(task);
+  });
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
